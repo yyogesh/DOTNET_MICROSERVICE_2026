@@ -1,0 +1,17 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.0">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\Catalog\Catalog.API\Catalog.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.SqlServer" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AspireUseCliBundle>true</AspireUseCliBundle>
+    <UserSecretsId>4b9a749d-c72f-41ab-8f6a-98b307a54d4e</UserSecretsId>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Aspire/">
+    <Project Path="src/Aspire/EShop.AppHost/EShop.AppHost.csproj" />
+    <Project Path="src/Aspire/EShop.ServiceDefaults/EShop.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/Services/" />
+  <Folder Name="/Services/Catalog/">
+    <Project Path="src/Services/Catalog/Catalog.API/Catalog.API.csproj" />
+  </Folder>
+</Solution>
