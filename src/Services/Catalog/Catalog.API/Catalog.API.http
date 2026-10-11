@@ -1,0 +1,9 @@
+﻿@Catalog.API_HostAddress = https://localhost:7047
+
+GET {{Catalog.API_HostAddress}}/
+
+###
+
+GET {{Catalog.API_HostAddress}}/api/products
+
+###

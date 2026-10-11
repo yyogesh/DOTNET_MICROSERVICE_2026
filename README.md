@@ -57,3 +57,55 @@ dotnet add src/Aspire/EShop.AppHost reference src/Services/Catalog/Catalog.API
 
 
 dotnet add src/Aspire/EShop.AppHost package Aspire.Hosting.SqlServer
+
+
+
+
+
+app.MapGet("/onion", () =>
+    {
+        Console.WriteLine("    handler");
+        return TypedResults.Ok("done");
+    })
+    .AddEndpointFilter(async (context, next) =>
+    {
+        Console.WriteLine("A: before");          // on the way in
+        var result = await next(context);        // go one layer deeper
+        Console.WriteLine("A: after");           // on the way out
+        return result;
+    })
+    .AddEndpointFilter(async (context, next) =>
+    {
+        Console.WriteLine("  B: before");
+        var result = await next(context); // function exe
+        Console.WriteLine("  B: after");
+        return result;
+    });
+
+
+<!-- A: before
+  B: before
+    handler
+  B: after
+A: after -->
+
+
+double a = 0.1 + 0.2;
+Console.WriteLine(a == 0.3); 
+
+# 0.30000000000000004
+
+
+
+dotnet add src/Services/Catalog/Catalog.API package Microsoft.AspNetCore.OpenApi
+dotnet add src/Services/Catalog/Catalog.API package Scalar.AspNetCore
+
+
+
+[FromRoute], [FromQuery], [FromHeader], [FromBody], [FromServices]
+
+
+dotnet dev-certs https --trust
+
+
+415

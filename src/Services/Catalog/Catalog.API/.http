@@ -1,0 +1,62 @@
+@baseUrl = https://localhost:7047
+@productId = 7a1c3e5f-2b4d-4f6a-8c9e-0a1b2c3d4e01
+
+### 1. List all products (expect 200)
+GET {{baseUrl}}/api/products
+
+### 2. Filter: shoes with "trail" in the name (expect 200, one product)
+GET {{baseUrl}}/api/products?category=shoes&search=trail
+
+### 3. Get one product (expect 200)
+GET {{baseUrl}}/api/products/{{productId}}
+
+### 4. Unknown id (expect 404)
+GET {{baseUrl}}/api/products/00000000-0000-0000-0000-000000000000
+
+### 5. Not a GUID (expect 404 from the route constraint)
+GET {{baseUrl}}/api/products/abc
+
+
+### 6. Create (expect 201 and a Location header)
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Road Racer 3",
+  "description": "Carbon-plated road racing shoe.",
+  "category": "Shoes",
+  "price": 189.00,
+  "imageUrl": null
+}
+
+### 7. Create with price 0 (expect 400 from the price filter)
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Free Shoe",
+  "description": "Too good to be true.",
+  "category": "Shoes",
+  "price": 0
+}
+
+### 8. Broken JSON (expect 400 from binding)
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+
+{ "name": "Broken",
+
+### 9. Replace a product (expect 204)
+PUT {{baseUrl}}/api/products/{{productId}}
+Content-Type: application/json
+
+{
+  "name": "Trail Runner 2",
+  "description": "Lightweight trail running shoe with a grippy outsole.",
+  "category": "Shoes",
+  "price": 119.99,
+  "imageUrl": null
+}
+
+### 10. Delete (expect 204, then 404 if you send it again)
+DELETE {{baseUrl}}/api/products/{{productId}}
